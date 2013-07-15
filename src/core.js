@@ -1218,7 +1218,9 @@ Handsontable.Core = function (rootElement, userSettings) {
           }
         }
 
-        grid.populateFromArray(areaStart, inputArray, areaEnd, 'paste', priv.settings.pasteMode);
+        priv.settings.beforePaste(inputArray, function(inputArray) {
+          grid.populateFromArray(areaStart, inputArray, areaEnd, 'paste', priv.settings.pasteMode);
+        })
       };
 
       function onKeyDown(event) {
