@@ -6,7 +6,7 @@
  * Licensed under the MIT license.
  * http://handsontable.com/
  *
- * Date: Sun Jun 30 2013 13:24:55 GMT+0200 (Central European Daylight Time)
+ * Date: Mon Jul 15 2013 13:35:37 GMT-0500 (CDT)
  */
 /*jslint white: true, browser: true, plusplus: true, indent: 4, maxerr: 50 */
 
@@ -1229,6 +1229,13 @@ Handsontable.Core = function (rootElement, userSettings) {
             instance.selectCell(areaStart.row, areaStart.col, areaEnd.row, areaEnd.col);
           }
         });
+
+        // Resize the table if the paste data overflows
+        if (priv.settings.pasteResize) {
+          if (priv.settings.pasteResize === "vertical") {
+            instance.alter("insert_row", null, areaEnd.row - instance.countRows() + 1);
+          }
+        }
 
         grid.populateFromArray(areaStart, inputArray, areaEnd, 'paste', priv.settings.pasteMode);
       };

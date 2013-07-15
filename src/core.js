@@ -1211,6 +1211,13 @@ Handsontable.Core = function (rootElement, userSettings) {
           }
         });
 
+        // Resize the table if the paste data overflows
+        if (priv.settings.pasteResize) {
+          if (priv.settings.pasteResize === "vertical") {
+            instance.alter("insert_row", null, areaEnd.row - instance.countRows() + 1);
+          }
+        }
+
         grid.populateFromArray(areaStart, inputArray, areaEnd, 'paste', priv.settings.pasteMode);
       };
 
